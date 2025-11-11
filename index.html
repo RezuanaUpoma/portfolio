@@ -89,7 +89,7 @@
             <div>
               <h2>Create and scale your web solutions with me</h2>
 
-              <a href="https://drive.google.com/file/d/1oa3bMBWT8X9VsrDXuJz-Pe9oUdgjunsZ/view?usp=sharing" download="YourName_CV">
+              <a href="https://drive.google.com/file/d/1uiPupQ3nPvz79zH6WEw7Izlx-yCFbS4f/view?usp=sharing" download="YourName_CV">
                 <button
                   type="button"
                   class="btn btn-dark btn-lg download-button"
@@ -482,12 +482,119 @@
           </div>
     
           <script src="style.js"></script>
+         
+         
+          <script>
+          // make these globals so openLightbox() can be called from inline onclicks
+let currentImageIndex = 0;
+let galleryImages = [];
+
+// Open Lightbox with Carousel
+function openLightbox(imgElement) {
+  galleryImages = Array.from(document.querySelectorAll(".gallery-item img"));
+  currentImageIndex = galleryImages.indexOf(imgElement);
+
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+
+  lightboxImg.src = imgElement.src;
+  lightbox.style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+
+// Close Lightbox
+function closeLightbox() {
+  const lightbox = document.getElementById("lightbox");
+  lightbox.style.display = "none";
+  document.body.style.overflow = "auto";
+}
+
+// Show Next Image
+function nextImage() {
+  if (!galleryImages.length) galleryImages = Array.from(document.querySelectorAll(".gallery-item img"));
+  currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+  updateLightboxImage();
+}
+
+// Show Previous Image
+function prevImage() {
+  if (!galleryImages.length) galleryImages = Array.from(document.querySelectorAll(".gallery-item img"));
+  currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+  updateLightboxImage();
+}
+
+// Update Lightbox Image Source
+function updateLightboxImage() {
+  const lightboxImg = document.getElementById("lightbox-img");
+  lightboxImg.src = galleryImages[currentImageIndex].src;
+}
+
+// Setup event listeners after DOM is ready
+document.addEventListener("DOMContentLoaded", function () {
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const prevBtn = document.getElementById("lightbox-prev");
+  const nextBtn = document.getElementById("lightbox-next");
+  const closeBtn = document.getElementById("lightbox-close");
+
+  // Close only when clicking the backdrop (i.e., the lightbox itself)
+  lightbox.addEventListener("click", function (e) {
+    // if click target is the container (not the image or controls) then close
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  // Stop clicks on the image and controls from bubbling to the lightbox container
+  lightboxImg.addEventListener("click", function (e) {
+    e.stopPropagation();
+  });
+
+  // Prev / Next buttons — stop propagation and run the action
+  if (prevBtn) {
+    prevBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      prevImage();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      nextImage();
+    });
+  }
+
+  // Close button
+  if (closeBtn) {
+    closeBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      closeLightbox();
+    });
+  }
+
+  // Keyboard navigation (Arrow keys + Escape)
+  document.addEventListener("keydown", function (event) {
+    if (document.getElementById("lightbox").style.display !== "flex") return; // only when open
+    if (event.key === "Escape") {
+      closeLightbox();
+    } else if (event.key === "ArrowRight") {
+      nextImage();
+    } else if (event.key === "ArrowLeft") {
+      prevImage();
+    }
+  });
+});
+
+
+          </script>
         </section>
         <!-- Lightbox Container -->
-        <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-          <span class="close">&times;</span>
-          <img class="lightbox-content" id="lightbox-img" />
-        </div>
+        <!-- Lightbox Container -->
+<div id="lightbox" class="lightbox">
+  <span id="lightbox-close" class="close">&times;</span>
+  <span id="lightbox-prev" class="prev" aria-label="Previous">&#10094;</span>
+  <img class="lightbox-content" id="lightbox-img" />
+  <span id="lightbox-next" class="next" aria-label="Next">&#10095;</span>
+</div>
 
     <!-- Education(/pricing) -->
     <section id="education-courses" class="modern-section">
@@ -647,23 +754,15 @@
               <span>June 2022 - Aug. 2023</span>
             </div>
             <div class="timeline-content">
-              <h3>Frontend Web Developer (part-time)</h3>
+              <h3>Frontend Web Developer (part-time remote)</h3>
               <h4>Mashrur Tours & Travels, Dhaka</h4>
               <ul>
                 
-                <li>
-                  Developed scalable software solutions with PHP and RESTful APIs to enhance functionality and communication.
-                </li>
-                <li>
-                  Streamlined software delivery with Jenkins, Docker, and Kubernetes, ensuring efficient CI/CD processes.
-                </li>
-                <li>
-                  Improved system reliability and deployment efficiency through Agile collaboration with cross-functional teams.
-                </li>
+              
               </ul>
             </div>
           </div>
-
+   <!--
           <div class="timeline-item">
             <div class="timeline-date">
               <span>September 2020 - October 2022 (online)</span>
@@ -672,7 +771,7 @@
               <h3>Founder & Entrepreneur</h3>
               <h4>GEN-ZEE Clothings</h4>
               <ul>
-                <li>
+           <li>
                   <b>Product Development:</b> Oversee design, sourcing, and
                   production.
                 </li>
@@ -684,6 +783,7 @@
                   <b>Customer Engagement:</b> Manage customer inquiries and
                   feedback.
                 </li>
+              
               </ul>
             </div>
           </div>
@@ -708,7 +808,7 @@
                 <li>
                   <b>Project Management:</b> Delivered multiple client projects
                   on time, ensuring high-quality standards.
-                </li>
+                </li>  -->
               </ul>
             </div>
           </div>
@@ -834,7 +934,7 @@
             Send me an email
           </button>
         </a>
-        <a href="https://drive.google.com/file/d/1oa3bMBWT8X9VsrDXuJz-Pe9oUdgjunsZ/view?usp=sharing" download="Rezuana_Imtiaz_Upoma_CV">
+        <a href="https://drive.google.com/file/d/1uiPupQ3nPvz79zH6WEw7Izlx-yCFbS4f/view?usp=sharing" download="Rezuana_Imtiaz_Upoma_CV">
           <button
             type="button"
             class="btn btn-outline-dark btn-lg download-button"
